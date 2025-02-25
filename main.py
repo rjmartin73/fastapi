@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict
 import pandas as pd
+import classify
 
 app = FastAPI()
 
@@ -16,9 +17,10 @@ async def classify_item(items: List[Item]):
         df = pd.DataFrame([item.dict() for item in items])
 
         # Example classification logic (replace with yours)
-        df["MainCategory"] = df["Description"].apply(lambda x: "CONDUIT" if "conduit" in x.lower() else "WIRE")
+        # df["MainCategory"] = df["Description"].apply(lambda x: "CONDUIT" if "conduit" in x.lower() else "WIRE")
+        return classify.classify_main(df)
 
-        return {"data": df.to_dict(orient="records")}
+        # return {"data": df.to_dict(orient="records")}
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing file\n{e}")
