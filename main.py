@@ -1,29 +1,39 @@
 from fastapi import FastAPI, HTTPException, Header, Request
 from pydantic import BaseModel
-from classify import classify_main  # Assuming this is your processing function
+from typing import List
+from classify import classify_main
 
 app = FastAPI()
 
 SECRET_API_KEY = "c6eb3706-43fc-41a5-b682-e57dcff5feb0"
 
-
-# ✅ Define JSON request schema
-class ItemRequest(BaseModel):
-    description: str
-
-@app.get("/")
-async def root():
-    return {"greeting": "Hello, World!", "message": "Welcome to FastAPI!"}
+class ClassificationRequest(BaseModel):
+    KeyID: int
+    Description: str
 
 @app.post("/classify")
-async def classify_item(request: ItemRequest, api_key: str = Header(None)):
-    # ✅ Check API key
+async def classify_item(request: Request, items: List[ClassificationRequest]):
+    
+    headers = dict(request.headers)
+    api_key = request.headers.get("x-api-key")
+
     if api_key != SECRET_API_KEY:
         raise HTTPException(status_code=403, detail="Unauthorized: Invalid API Key")
-
+    
     try:
-        # ✅ Pass JSON object to classify_main
-        return classify_main(contents=request.description)  
+        results = []
+        for item in items:
+            classification = classify_main(item.Description)
+            results.append({
+                "KeyID": item.KeyID,
+                "Description": item.Description,
+                "MainCategory": classification["MainCategory"],
+                "SubCategory": classification["SubCategory"],
+                "Size": classification["Size"],
+                "FinalLabel": classification["FinalLabel"]
+            })
+
+        return {"data": results}
 
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error processing request: {e}")
+        raise HTTPException(status_code=400, detail=f"Error processing file\n{e}")
