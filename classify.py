@@ -142,81 +142,46 @@ def get_wire_gauge(description):
     return 'UNK'  # ✅ Returns UNK only if no match is found       
 
 
-# Main methodimport pandas as pd
-import pandas as pd
-import numpy as np
-import json
+# Main method
+def classify_main(df):
+    # Ensure column names are correct
+    if "Description" not in df.columns:
+        raise ValueError("Missing 'Description' column in the input data.")
 
-def classify_main(content):    
-    try:
-        # 🔹 Step 1: Print raw content for debugging
-        print(f"📌 Received Content Type: {type(content)}")
-        print(f"📌 Raw Content: {content}\n")
-
-        # 🔹 Step 2: Decode JSON safely
-        try:
-            if isinstance(content, bytes):  
-                content = json.loads(content.decode("utf-8"))
-            elif isinstance(content, str):  
-                content = json.loads(content)
-            else:
-                raise ValueError("Invalid input format: Expected bytes or string JSON")
-        except json.JSONDecodeError as json_error:
-            print(f"🚨 JSON Decode Error: {json_error}")
-            raise ValueError(f"Error processing file\n{json_error}")
-
-        # 🔹 Step 3: Ensure content is a **list of dictionaries**
-        if isinstance(content, dict):  # If a single dictionary, wrap it in a list
-            content = [content]
-        elif not isinstance(content, list):  
-            raise ValueError("Invalid input: Expected a list of dictionaries")
-
-        # 🔹 Step 4: Convert to DataFrame
-        df = pd.DataFrame(content)
-
-        # 🔹 Step 5: Print DataFrame columns
-        print(f"📌 DataFrame Columns: {df.columns}\n")
-
-        if 'Description' not in df.columns:
-            raise ValueError("Missing required field: 'Description'")
-
-        # 🔹 Step 6: Classification logic
-        df['MainCategory'] = df['Description'].apply(classify_item).str.upper()
-        df['SubCategory'] = np.where(
-            df['MainCategory'].str.contains('CONDUIT'),
-            df['Description'].apply(classify_conduit),
-            np.where(
-                df['MainCategory'].str.contains('WIRE'),
-                df['Description'].apply(wire_type),
-                'N/A'
-            )
-        )
-        df['Size'] = np.where(
-            df['MainCategory'].str.contains('CONDUIT'),
-            df['Description'].apply(get_conduit_size),
-            np.where(
-                df['MainCategory'].str.contains('WIRE'),
-                df['Description'].apply(get_wire_gauge),
-                'N/A'
-            )
-        )
-        df['FinalLabel'] = np.where(
-            df['MainCategory'].str.contains('CONDUIT'),
-            df['Size'] + ' ' + df['SubCategory'],
-            np.where(
-                df['MainCategory'].str.contains('WIRE'),
-                df['Size'] + ' ' + df['Description'].apply(wire_type),
-                'N/A'
-            )
-        )
-
-        # 🔹 Step 7: Print final DataFrame
-        print(f"📌 Final DataFrame:\n{df}\n")
-
-        # 🔹 Step 8: Return the formatted JSON response
-        return {"data": df.to_dict(orient="records")}
-
-    except Exception as e:
-        print(f"🚨 Error: {e}")
-        raise ValueError(f"Error processing file\n{e}")
+    # Step 1: Classify as Conduit, Wire, or Exclude
+    df['MainCategory'] = df['Description'].apply(classify_item).str.upper()
     
+    # Step 2: Classify SubCategory
+    df['SubCategory'] = np.where(
+        df['MainCategory'].str.contains('CONDUIT'),
+        df['Description'].apply(classify_conduit),
+        np.where(
+            df['MainCategory'].str.contains('WIRE'),
+            df['Description'].apply(wire_type),
+            'N/A'
+        ))
+
+    # Step 3: Determine Size
+    df['Size'] = np.where(
+        df['MainCategory'].str.contains('CONDUIT'),
+        df['Description'].apply(get_conduit_size),
+        np.where(
+            df['MainCategory'].str.contains('WIRE'),
+            df['Description'].apply(get_wire_gauge),
+            'N/A'
+        )
+    )
+
+    # Step 4: Generate Final Label
+    df['FinalLabel'] = np.where(
+        df['MainCategory'].str.contains('CONDUIT'),
+        df['Size'] + ' ' + df['SubCategory'],
+        np.where(
+            df['MainCategory'].str.contains('WIRE'),
+            df['Size'] + ' ' + df['Description'].apply(wire_type),
+            'N/A'
+        )
+    )
+
+    # Convert to JSON format
+    return df.to_dict(orient="records")
