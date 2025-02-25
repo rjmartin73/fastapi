@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict
+import pandas as pd
+from classify import classify_main  # Import your original classification function
 
 app = FastAPI()
 
@@ -15,19 +17,17 @@ class RequestBody(BaseModel):
 @app.post("/classify")
 async def classify_items(request_body: RequestBody):
     try:
-        items = request_body.data  # Extract the list from "data"
+        # Convert Pydantic objects to a list of dictionaries
+        items_list = [item.dict() for item in request_body.data]
         
-        # Process the data
-        results = []
-        for item in items:
-            result = {
-                "KeyID": item.KeyID,
-                "Description": item.Description,
-                "Category": "WIRE" if "wire" in item.Description.lower() else "CONDUIT"
-            }
-            results.append(result)
+        # Convert to DataFrame
+        df = pd.DataFrame(items_list)
 
-        return {"data": results}
+        # Pass DataFrame to classification function
+        classified_df = classify_main(df)
+
+        # Convert classified DataFrame back to JSON
+        return {"data": classified_df}
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing file\n{e}")
