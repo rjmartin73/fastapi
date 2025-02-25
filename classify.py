@@ -144,14 +144,24 @@ def get_wire_gauge(description):
 
 # Main method
 def classify_main(content):    
-    # data = json.loads(contents.decode("utf-8"))
-    # data = json.loads(json_file)
+    # Ensure content is a list of dictionaries
+    if isinstance(content, bytes):  
+        import json
+        content = json.loads(content.decode("utf-8"))  # Decode if bytes
+    
+    if not isinstance(content, list):  
+        raise ValueError("Invalid input: Expected a list of dictionaries")
+
+    # Convert content to DataFrame
     df = pd.DataFrame(content)
 
-# Classify as Conduit or wire
-    df['MainCategory'] = (df['Description'].apply(classify_item).str.upper())
-    
-    # Classify type of conduit or wire
+    if 'Description' not in df.columns:
+        raise ValueError("Missing required field: 'Description'")
+
+    # Classify as Conduit or Wire
+    df['MainCategory'] = df['Description'].apply(classify_item).str.upper()
+
+    # Classify type of Conduit or Wire
     df['SubCategory'] = np.where(
         df['MainCategory'].str.contains('CONDUIT'),
         df['Description'].apply(classify_conduit),
@@ -159,7 +169,10 @@ def classify_main(content):
             df['MainCategory'].str.contains('WIRE'),
             df['Description'].apply(wire_type),
             'N/A'
-        ))
+        )
+    )
+
+    # Determine Size
     df['Size'] = np.where(
         df['MainCategory'].str.contains('CONDUIT'),
         df['Description'].apply(get_conduit_size),
@@ -169,6 +182,8 @@ def classify_main(content):
             'N/A'
         )
     )
+
+    # Final Label Construction
     df['FinalLabel'] = np.where(
         df['MainCategory'].str.contains('CONDUIT'),
         df['Size'] + ' ' + df['SubCategory'],
@@ -178,8 +193,5 @@ def classify_main(content):
             'N/A'
         )
     )
-    return {"data" : df.to_dict(orient="records")}
-    
 
-# json_file = "./data/test_data.json"
-# classify_main(json_file)
+    return {"data": df.to_dict(orient="records")}
