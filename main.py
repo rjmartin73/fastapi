@@ -15,19 +15,19 @@ class RequestBody(BaseModel):
     data: List[Item]  # Expecting "data" key with a list of items
 
 @app.post("/classify")
-async def classify_items(request_body: RequestBody):
+async def classify_item(request: Dict):
     try:
-        # Convert Pydantic objects to a list of dictionaries
-        items_list = [item.dict() for item in request_body.data]
-        
+        items = request.get("data", [])
+        if not isinstance(items, list):
+            raise HTTPException(status_code=400, detail="Invalid input: Expected a list of dictionaries")
+
         # Convert to DataFrame
-        df = pd.DataFrame(items_list)
+        df = pd.DataFrame(items)
 
-        # Pass DataFrame to classification function
-        classified_df = classify_main(df)
+        # Your classification logic...
+        df["MainCategory"] = df["Description"].apply(lambda x: "CONDUIT" if "conduit" in x.lower() else "WIRE")
 
-        # Convert classified DataFrame back to JSON
-        return {"data": classified_df}
+        return {"data": df.to_dict(orient="records")}
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing file\n{e}")
