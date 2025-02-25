@@ -142,26 +142,42 @@ def get_wire_gauge(description):
     return 'UNK'  # ✅ Returns UNK only if no match is found       
 
 
-# Main method
+# Main methodimport pandas as pd
+import numpy as np
+import json
+
 def classify_main(content):    
     try:
-        # 🔹 Step 1: Decode bytes if necessary
+        # 🔹 Step 1: Print raw content for debugging
+        print(f"📌 Received Content Type: {type(content)}")
+        print(f"📌 Raw Content: {content}\n")
+
+        # 🔹 Step 2: Decode bytes if necessary
         if isinstance(content, bytes):  
             content = json.loads(content.decode("utf-8"))
+        elif isinstance(content, str):  
+            content = json.loads(content)
 
-        # 🔹 Step 2: Ensure content is a list of dictionaries
+        # 🔹 Step 3: Print content after decoding
+        print(f"📌 Decoded Content Type: {type(content)}")
+        print(f"📌 Decoded Content: {content}\n")
+
+        # 🔹 Step 4: Ensure content is a list of dictionaries
         if isinstance(content, dict):  # If a single dictionary, wrap it in a list
             content = [content]
         elif not isinstance(content, list):  
             raise ValueError("Invalid input: Expected a list of dictionaries")
 
-        # 🔹 Step 3: Convert content to DataFrame
+        # 🔹 Step 5: Convert content to DataFrame
         df = pd.DataFrame(content)
+
+        # 🔹 Step 6: Print dataframe columns
+        print(f"📌 DataFrame Columns: {df.columns}\n")
 
         if 'Description' not in df.columns:
             raise ValueError("Missing required field: 'Description'")
 
-        # 🔹 Step 4: Classification logic
+        # 🔹 Step 7: Classification logic
         df['MainCategory'] = df['Description'].apply(classify_item).str.upper()
         df['SubCategory'] = np.where(
             df['MainCategory'].str.contains('CONDUIT'),
@@ -191,8 +207,13 @@ def classify_main(content):
             )
         )
 
-        # 🔹 Step 5: Return the formatted JSON response
+        # 🔹 Step 8: Print final dataframe for debugging
+        print(f"📌 Final DataFrame:\n{df}\n")
+
+        # 🔹 Step 9: Return the formatted JSON response
         return {"data": df.to_dict(orient="records")}
 
     except Exception as e:
+        print(f"🚨 Error: {e}")
         raise ValueError(f"Error processing file\n{e}")
+
