@@ -17,8 +17,8 @@ async def classify_item(request: Request, items: List[ClassificationRequest]):
     headers = dict(request.headers)
     api_key = request.headers.get("x-api-key")
 
-    if api_key != SECRET_API_KEY:
-        raise HTTPException(status_code=403, detail="Unauthorized: Invalid API Key")
+    # if api_key != SECRET_API_KEY:
+    #     raise HTTPException(status_code=403, detail="Unauthorized: Invalid API Key")
     
     try:
         results = []
