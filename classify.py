@@ -143,10 +143,10 @@ def get_wire_gauge(description):
 
 
 # Main method
-def classify_main(contents):    
-    data = json.loads(contents.decode("utf-8"))
+def classify_main(content):    
+    # data = json.loads(contents.decode("utf-8"))
     # data = json.loads(json_file)
-    df = pd.DataFrame(data)
+    df = pd.DataFrame(content)
 
 # Classify as Conduit or wire
     df['MainCategory'] = (df['Description'].apply(classify_item).str.upper())
