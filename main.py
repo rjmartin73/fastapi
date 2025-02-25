@@ -22,8 +22,8 @@ async def classify_item(request: Request,
     # print("\n📌 Received Headers:", headers, "\n")
     # print(f"📌 Extracted API Key: {api_key}\n")
     
-    if api_key != SECRET_API_KEY:
-        raise HTTPException(status_code=403, detail="Unauthorized: Invalid API Key")
+    # if api_key != SECRET_API_KEY:
+    #     raise HTTPException(status_code=403, detail="Unauthorized: Invalid API Key")
     try:
         # Read JSON file
         contents = await file.read()
