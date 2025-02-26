@@ -30,5 +30,7 @@ async def classify_item(items: List[Item]):
 @app.get("/classification-terms")
 def get_definitions():
     """Returns lists of wire and conduit terms used to classify """
-    return f"Conduit terms: {list(classify.conduit_terms)} \
-            Wire terms: {list(classify.wire_terms)}"
+    return f"Conduit terms: {list(classify.conduit_terms).sort()}\n\
+            Wire terms: {list(classify.wire_terms).sort()}"
+
+# print(get_definitions)
