@@ -9,7 +9,7 @@ conduit_terms = {'cndt', 'conduit', 'emt', 'ent', 'flex', 'grc', 'pipe', 'pvc', 
 ent_terms = ['ent', 'smurf']
 emt_terms = ['emt', "thinwall", "thin wall"]
 grc_terms = ['grc', 'rmc', 'steel', 'galv', 'imc']
-pvc_terms = ['pvc', 'rigid', 'ridgid', 'ridig']
+pvc_terms = ['pvc', 'rigid', 'ridgid', 'ridig', 'sch']
 flex_terms = ['flex', 'carflex', 'sealtight', 'seal tight', 'liquid', 'liq tite', 'liq-tite', "lfmc", 'frt', 'nmlt']
 conduit_exclude_terms = {
     '100A', '110A', '120A', '130A', '140A', '150A', '160A', '170A', '180A', '190A', '200A', '20A', '30A',
