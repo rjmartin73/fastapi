@@ -185,3 +185,6 @@ def classify_main(df):
 
     # Convert to JSON format
     return {"results": df.to_dict(orient="records")}
+
+def get_classifiers():
+    return list(conduit_terms)
