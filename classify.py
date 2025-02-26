@@ -86,7 +86,6 @@ wire_sizes = {
 }
 
 
-
 # Step 1
 def classify_item(description):
     if isinstance(description, str) and date_pattern.search(description) is None:
@@ -96,6 +95,7 @@ def classify_item(description):
         elif any(term in desc_lower for term in conduit_terms) and not any(term in desc_lower for term in conduit_exclude_terms):
             return 'conduit'
     return 'exclude'
+
 
 # Step 2: conduit
 def classify_conduit(description):
@@ -184,4 +184,4 @@ def classify_main(df):
     )
 
     # Convert to JSON format
-    return df.to_dict(orient="records")
+    return df.to_json(orient="records")
