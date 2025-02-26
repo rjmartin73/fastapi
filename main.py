@@ -25,3 +25,8 @@ async def classify_item(items: List[Item]):
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing file\n{e}")
+
+
+@app.get("/classification-terms")
+def get_definitions():
+    return "testing"

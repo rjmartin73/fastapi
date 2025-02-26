@@ -5,7 +5,7 @@ import json
 
 date_pattern = re.compile(r'\b(?:\d{4}[-/]\d{2}[-/]\d{2}|\d{2}[-/]\d{2}[-/]\d{4}|\d{2}[-/]\d{2}[-/]\d{2})\b')
 # Conduit
-conduit_terms = {'cndt', 'conduit', 'emt', 'ent', 'flex', 'grc', 'pipe', 'pvc', 'smurf', 'sealtight'}
+conduit_terms = {'cndt', 'conduit', 'emt', 'ent', 'flex', 'grc', 'pipe', 'pvc', 'smurf', 'sealtight', 'cond'}
 ent_terms = ['ent', 'smurf']
 emt_terms = ['emt', "thinwall", "thin wall"]
 grc_terms = ['grc', 'rmc', 'steel', 'galv', 'imc']
@@ -104,7 +104,7 @@ def classify_conduit(description):
         if any(term in desc_lower for term in ent_terms):
             return 'CONDUIT - ENT'
         elif any(term in desc_lower for term in flex_terms):
-                return 'CONDUIT - FLEX'
+            return 'CONDUIT - FLEX'
         elif any(term in desc_lower for term in emt_terms):
             return 'CONDUIT - EMT'
         elif any(term in desc_lower for term in grc_terms):
