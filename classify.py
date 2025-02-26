@@ -184,4 +184,4 @@ def classify_main(df):
     )
 
     # Convert to JSON format
-    return df.to_json(orient="records")
+    return {"results": df.to_dict(orient="records")}
