@@ -117,7 +117,8 @@ def classify_conduit(description):
 
 # Step 3: conduit
 def get_conduit_size(description):
-    description = description.replace("- ", " ").replace(" -", " ") 
+    description = description.lower()
+    description = description.replace("- ", " ").replace(" -", " ")
     for size, pattern in size_patterns.items():
         if pattern.search(description):
             return f'{size}'  # ✅ Correctly returns the first match
