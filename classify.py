@@ -40,7 +40,7 @@ size_patterns = {
     '5"': re.compile(r'(?<!\d)5[”|"|in| |.]|(?<!\d)5$'),
     '4"': re.compile(r'(?<!\d)4[”|"|in| |.]|(?<!\d)4$'),
     '3"': re.compile(r'(?<!\d)3[”|"|in| |.]|(?<!\d)3$'),
-    '2"': re.compile(r'(?<!\d)2[”|"|in| |.]|(?<!\d)2$'),
+    '2"': re.compile(r'(?<!\d)2\s?[”|"|in| |.]|(?<!\d)2$'),
     '1"': re.compile(r'(?<!\d)1[”|"|-|in|\s|.]?|(?<!\d)1$',re.IGNORECASE),
 }
 
@@ -57,7 +57,7 @@ wire_exclude_terms = {
     'lube', 'reduc', 'dimmer', 'hold', 'riser', 'bit', 'pigtail', 'bend', 'phillip', ' ma ', 'ma,', ' fa', 'term', 'ship', 'crimp',
     'pin ', 'offset', 'conduit', 'emt', 'transit', 'support', 'gutter', 'scissor', 'pig', 'grd', 'southwire', 'stack'}
 wire_types = {
-    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
+    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft|mcm|copper|cooper|mca|mc|wire)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
     "MC/ROMEX CABLE": re.compile(r'(?<!\w)?(?:cable|romex|ser)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "LOW VOLTAGE CABLE": re.compile(r'(?<!\w)?(?:low voltage|cat|rj)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE)
 }
@@ -185,6 +185,7 @@ def classify_main(df):
 
     # Convert to JSON format
     return {"results": df.to_dict(orient="records")}
+
 
 def get_classifiers():
     return list(conduit_terms)
