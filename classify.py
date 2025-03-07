@@ -29,19 +29,19 @@ conduit_exclude_terms = {
     ' fa', ' ma ', 'ma,', 'male', 'fema', 'bolt', 'hole', 'putty', 'flexpro', 'concrete', 'bonding', 'agent', 'heat' 'gun',
     'seal off', 'outlet', 'price'} 
 size_patterns = {
-    '3-1/2"': re.compile(r'(?<!\d)3[-| ]1/2(?!\d)'),
-    '2-1/2"': re.compile(r'(?<!\d)2[-| ]1/2(?!\d)'),
-    '1-3/4"': re.compile(r'(?<!/d)1[-| ]3/4(?!\d)'),
-    '1-1/2"': re.compile(r'(?<!\d)1[-| ]1/2(?!\d)'),
-    '1-1/4"': re.compile(r'(?<!\d)1[-| ]1/4(?!\d)'),
-    '3/4"': re.compile(r'(?<!\d)3/4(?!\d)'),
-    '1/2"': re.compile(r'(?<!\d)1/2(?!\d)'),
-    '6"': re.compile(r'(?<!\d)6[”|"|in| |.]|(?<!\d)6$'),
-    '5"': re.compile(r'(?<!\d)5[”|"|in| |.]|(?<!\d)5$'),
-    '4"': re.compile(r'(?<!\d)4[”|"|in| |.]|(?<!\d)4$'),
-    '3"': re.compile(r'(?<!\d)3[”|"|in| |.]|(?<!\d)3$'),
-    '2"': re.compile(r'(?<!\d)2\s?[”|"|in| |.]|(?<!\d)2$'),
-    '1"': re.compile(r'(?<!\d)1[”|"|-|in|\s|.]?|(?<!\d)1$',re.IGNORECASE),
+    '3-1/2"': re.compile(r'(?<!\d)3[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '2-1/2"': re.compile(r'(?<!\d)2[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '1-3/4"': re.compile(r'(?<!/d)1[-| ]3/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '1-1/2"': re.compile(r'(?<!\d)1[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '1-1/4"': re.compile(r'(?<!\d)1[-| ]1/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '3/4"': re.compile(r'(?<!\d)3/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '1/2"': re.compile(r'(?<!\d)1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
+    '6"': re.compile(r'(?<!\d)6\s?[”|"|-|in|\s|.|-]|(?<!\d)6$', re.IGNORECASE),
+    '5"': re.compile(r'(?<!\d)5\s?[”|"|-|in|\s|.|-]|(?<!\d)5$', re.IGNORECASE),
+    '4"': re.compile(r'(?<!\d)4\s?[”|"|-|in|\s|.|-]|(?<!\d)4$', re.IGNORECASE),
+    '3"': re.compile(r'(?<!\d)3\s?[”|"|-|in|\s|.|-]|(?<!\d)3$', re.IGNORECASE),
+    '2"': re.compile(r'(?<!\d)2\s?[”|"|-|in|\s|.|-]|(?<!\d)2$', re.IGNORECASE),
+    '1"': re.compile(r'(?<!\d)1\s?[”|"|-|in|\s|.|-]?|(?<!\d)1$', re.IGNORECASE),
 }
 
 # Wire
@@ -62,7 +62,7 @@ wire_types = {
     "LOW VOLTAGE CABLE": re.compile(r'(?<!\w)?(?:low voltage|cat|rj)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE)
 }
 wire_sizes = {
-    "#4/0": re.compile(r'(?<!\w)?#?(_4\/\d)', re.IGNORECASE),
+    "#4/0": re.compile(r'(?<!\w)#?4/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#3/0": re.compile(r'(?<!\w)#?3/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#2/0": re.compile(r'(?<!\w)#?2/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#1/0": re.compile(r'(?<!\w)#?1/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
@@ -79,8 +79,8 @@ wire_sizes = {
     "#8": re.compile(r'(?<!\w)#?8(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#6": re.compile(r'(?<!\w)#?6(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#4": re.compile(r'(?<!\w)#?4(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#3": re.compile(r'(?<!\w)#?3(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#2": re.compile(r'(?<!\w)#?2(?:KCMIL|mcm)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#3": re.compile(r'(?<!\w)#?3(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#2": re.compile(r'(?<!\w)#?2(?!/0)(?:KCMIL|mcm)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#1": re.compile(r'(?<!\w)#?1(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "LOW VOLTAGE": re.compile(r'\b(?:low\s*voltage|cat[56][E]?|romex|fplr|["|#]?16|18)\b', re.IGNORECASE)
 }
