@@ -27,21 +27,21 @@ conduit_exclude_terms = {
     'vise', 'watt', 'wrap', 'pick', 'ball', 'spray', 'reduc', 'xentry', 'flouresc', 'mitsubishi', 'snap', 'enclosure',
     'oz', 'weather head', 'weatherhed', 'install', 'ush', 'unload', 'fluor', 'space', 'scent', 'cpl', 'temflex', 'cross',
     ' fa', ' ma ', 'ma,', 'male', 'fema', 'bolt', 'hole', 'putty', 'flexpro', 'concrete', 'bonding', 'agent', 'heat' 'gun',
-    'seal off', 'outlet', 'price'} 
+    'seal off', 'outlet', 'price', 'hgr'} 
 size_patterns = {
-    '3-1/2"': re.compile(r'(?<!\d)3[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '2-1/2"': re.compile(r'(?<!\d)2[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '1-3/4"': re.compile(r'(?<!/d)1[-| ]3/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '1-1/2"': re.compile(r'(?<!\d)1[-| ]1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '1-1/4"': re.compile(r'(?<!\d)1[-| ]1/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '3/4"': re.compile(r'(?<!\d)3/4\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '1/2"': re.compile(r'(?<!\d)1/2\s?[”|"|-|in|\s|.|-]|(?!\d)', re.IGNORECASE),
-    '6"': re.compile(r'(?<!\d)6\s?[”|"|-|in|\s|.|-]|(?<!\d)6$', re.IGNORECASE),
-    '5"': re.compile(r'(?<!\d)5\s?[”|"|-|in|\s|.|-]|(?<!\d)5$', re.IGNORECASE),
-    '4"': re.compile(r'(?<!\d)4\s?[”|"|-|in|\s|.|-]|(?<!\d)4$', re.IGNORECASE),
-    '3"': re.compile(r'(?<!\d)3\s?[”|"|-|in|\s|.|-]|(?<!\d)3$', re.IGNORECASE),
-    '2"': re.compile(r'(?<!\d)2\s?[”|"|-|in|\s|.|-]|(?<!\d)2$', re.IGNORECASE),
-    '1"': re.compile(r'(?<!\d)1\s?[”|"|-|in|\s|.|-]?|(?<!\d)1$', re.IGNORECASE),
+    '3-1/2"': re.compile(r'(?<!\d)3[-| ]1/2(?!\d)', re.IGNORECASE),
+    '2-1/2"': re.compile(r'(?<!\d)2[-| ]1/2(?!\d)', re.IGNORECASE),
+    '1-3/4"': re.compile(r'(?<!/d)1[-| ]3/4(?!\d)', re.IGNORECASE),
+    '1-1/2"': re.compile(r'(?<!\d)1[-| ]1/2(?!\d)', re.IGNORECASE),
+    '1-1/4"': re.compile(r'(?<!\d)1[-| ]1/4(?!\d)', re.IGNORECASE),
+    '3/4"': re.compile(r'(?<!\d)3/4(?!\d)', re.IGNORECASE),
+    '1/2"': re.compile(r'(?<!\d)1/2(?!\d)', re.IGNORECASE),
+    '6"': re.compile(r'(?<!\d)6[”|"|in| |.]|(?<!\d)6$', re.IGNORECASE),
+    '5"': re.compile(r'(?<!\d)5[”|"|in| |.]|(?<!\d)5$', re.IGNORECASE),
+    '4"': re.compile(r'(?<!\d)4[”|"|in| |.]|(?<!\d)4$', re.IGNORECASE),
+    '3"': re.compile(r'(?<!\d)3[”|"|in| |.]|(?<!\d)3$', re.IGNORECASE),
+    '2"': re.compile(r'(?<!\d)2\s?[”|"|in| |.]|(?<!\d)2$', re.IGNORECASE),
+    '1"': re.compile(r'(?<!\d)1[”|"|-|in|\s|.]?|(?<!\d)1$', re.IGNORECASE),
 }
 
 # Wire
