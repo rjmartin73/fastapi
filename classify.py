@@ -66,13 +66,6 @@ wire_sizes = {
     "#3/0": re.compile(r'(?<!\w)#?3/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#2/0": re.compile(r'(?<!\w)#?2/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#1/0": re.compile(r'(?<!\w)#?1/0(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#750": re.compile(r'(?<!\w)#?750(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#600": re.compile(r'(?<!\w)#?600(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#500": re.compile(r'(?<!\w)#?500(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#400": re.compile(r'(?<!\w)#?400(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#350": re.compile(r'(?<!\w)#?350(?:KCMIL|mcm|(?=[a-zA-Z]))?', re.IGNORECASE),
-    "#300": re.compile(r'(?<!\w)#?300(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
-    "#250": re.compile(r'(?<!\w)?#?250(?:KCMIL|mcm|str)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#14": re.compile(r'(?<!\w)#?14(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#12": re.compile(r'(?<!\w)?#?12(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#10": re.compile(r'(?<!\w)#?10(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
@@ -82,6 +75,13 @@ wire_sizes = {
     "#3": re.compile(r'(?<!\w)#?3(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#2": re.compile(r'(?<!\w)#?2(?!/0)(?:KCMIL|mcm)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "#1": re.compile(r'(?<!\w)#?1(?!/0)(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#750": re.compile(r'(?<!\w)#?750(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#600": re.compile(r'(?<!\w)#?600(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#500": re.compile(r'(?<!\w)#?500(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#400": re.compile(r'(?<!\w)#?400(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#350": re.compile(r'(?<!\w)#?350(?:KCMIL|mcm|(?=[a-zA-Z]))?', re.IGNORECASE),
+    "#300": re.compile(r'(?<!\w)#?300(?:KCMIL|mcm)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "#250": re.compile(r'(?<!\w)?#?250(?:KCMIL|mcm|str)?(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "LOW VOLTAGE": re.compile(r'\b(?:low\s*voltage|cat[56][E]?|romex|fplr|["|#]?16|18)\b', re.IGNORECASE)
 }
 

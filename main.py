@@ -43,9 +43,9 @@ def get_definitions():
 
 # test data for testing the classifier
 test_data = [
-    {"KeyID": "1093404", "Description": "white with black stripe 12 sol"},
-    {"KeyID": "1102219", "Description": "white with red stripe 12 solid"},
-    {"KeyID": "1187083", "Description": "white with blue stripe 12 soli"}
+    {"KeyID": "1093404", "Description": "12-3 MC Cable Black,Red - 250"},
+    {"KeyID": "1102219", "Description": "10-3 MC Cable Black,Red - 250"},
+    {"KeyID": "1187083", "Description": "10-2 MC Cable With 0-10 Brown"}
 ]
 
 
