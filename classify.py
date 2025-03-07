@@ -57,8 +57,8 @@ wire_exclude_terms = {
     'lube', 'reduc', 'dimmer', 'hold', 'riser', 'bit', 'pigtail', 'bend', 'phillip', ' ma ', 'ma,', ' fa', 'term', 'ship', 'crimp',
     'pin ', 'offset', 'conduit', 'emt', 'transit', 'support', 'gutter', 'scissor', 'pig', 'grd', 'southwire', 'stack'}
 wire_types = {
-    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft|mcm|copper|cooper|mca|mc|wire|so\s?|soow)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
     "MC/ROMEX CABLE": re.compile(r'(?<!\w)?(?:cable|romex|ser)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
+    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft|mcm|copper|cooper|mca|mc|wire|so\s?|soow)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
     "LOW VOLTAGE CABLE": re.compile(r'(?<!\w)?(?:low voltage|cat|rj)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE)
 }
 wire_sizes = {
