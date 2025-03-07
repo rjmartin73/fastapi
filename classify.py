@@ -47,7 +47,7 @@ size_patterns = {
 # Wire
 wire_terms = {
     'wire', 'cable', 'thhn', 'xhhw', 'awg', 'stranded', 'thw', 'romex', '12/2', '14/2', '20a', '30a', '4/0',
-    '#10', '# 10', '12/4', '#12', '# 12', '#14', '# 14', '#16', 'cat5', 'cat6', '8/2', '6/2'}
+    '#10', '# 10', '12/4', '#12', '# 12', '#14', '# 14', '#16', 'cat5', 'cat6', '8/2', '6/2' '12', 'stripe'}
 wire_exclude_terms = {
     '100A', '110A', '120A', '15A', '20A', '30A', '40A', '50A', '60A', '70A', '80A', '90A', 'TY275M', 'adapter',
     'anchor', 'bolt', 'book', 'box', 'bracket', 'break', 'cap', 'clamp', 'clip', 'conn', 'connector', 'cover', 'cutter',
@@ -57,7 +57,7 @@ wire_exclude_terms = {
     'lube', 'reduc', 'dimmer', 'hold', 'riser', 'bit', 'pigtail', 'bend', 'phillip', ' ma ', 'ma,', ' fa', 'term', 'ship', 'crimp',
     'pin ', 'offset', 'conduit', 'emt', 'transit', 'support', 'gutter', 'scissor', 'pig', 'grd', 'southwire', 'stack'}
 wire_types = {
-    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft|mcm|copper|cooper|mca|mc|wire|so\s|soow)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
+    "WIRE THHN/XHHW/OTHER": re.compile(r'(?<!\w)?(?:thhn|xhhw|bare|uf|soft|mcm|copper|cooper|mca|mc|wire|so\s?|soow)(?:[a-zA-Z\s_/.-]?|$)', re.IGNORECASE),
     "MC/ROMEX CABLE": re.compile(r'(?<!\w)?(?:cable|romex|ser)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE),
     "LOW VOLTAGE CABLE": re.compile(r'(?<!\w)?(?:low voltage|cat|rj)(?=[a-zA-Z\s_/.-]|$)', re.IGNORECASE)
 }
